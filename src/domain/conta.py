@@ -20,3 +20,8 @@ class Conta:
         if valor > self.saldo:
             raise SaldoInsuficienteError("Saldo insuficiente")
         self.saldo -= valor
+
+    def creditar(self, valor: Decimal) -> None:
+        if valor <= 0:
+            raise ValorInvalidoError("O valor deve ser maior que zero")
+        self.saldo += valor
