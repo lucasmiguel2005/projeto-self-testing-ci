@@ -36,3 +36,21 @@ def test_nao_aceita_valor_zero_ou_negativo_no_debito(valor):
         conta.debitar(valor)
 
     assert conta.saldo == Decimal("100.00")
+
+
+def test_creditar_aumenta_o_saldo():
+    conta = Conta(titular="Ana", saldo_inicial=Decimal("100.00"))
+
+    conta.creditar(Decimal("25.50"))
+
+    assert conta.saldo == Decimal("125.50")
+
+
+@pytest.mark.parametrize("valor", [Decimal("0"), Decimal("-5.00")])
+def test_nao_aceita_valor_zero_ou_negativo_no_credito(valor):
+    conta = Conta(titular="Ana", saldo_inicial=Decimal("100.00"))
+
+    with pytest.raises(ValorInvalidoError):
+        conta.creditar(valor)
+
+    assert conta.saldo == Decimal("100.00")
