@@ -15,13 +15,16 @@ class Conta:
         self.saldo = saldo_inicial
 
     def debitar(self, valor: Decimal) -> None:
-        if valor <= 0:
-            raise ValorInvalidoError("O valor deve ser maior que zero")
+        self._validar_valor(valor)
         if valor > self.saldo:
             raise SaldoInsuficienteError("Saldo insuficiente")
         self.saldo -= valor
 
     def creditar(self, valor: Decimal) -> None:
+        self._validar_valor(valor)
+        self.saldo += valor
+
+    @staticmethod
+    def _validar_valor(valor: Decimal) -> None:
         if valor <= 0:
             raise ValorInvalidoError("O valor deve ser maior que zero")
-        self.saldo += valor
