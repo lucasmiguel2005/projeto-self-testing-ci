@@ -10,9 +10,10 @@ class ValorInvalidoError(Exception):
 
 
 class Conta:
-    def __init__(self, titular: str, saldo_inicial: Decimal):
+    def __init__(self, titular: str, saldo_inicial: Decimal, numero: int | None = None):
         self.titular = titular
         self.saldo = saldo_inicial
+        self.numero = numero
 
     def debitar(self, valor: Decimal) -> None:
         self._validar_valor(valor)
